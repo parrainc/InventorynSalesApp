@@ -1,0 +1,26 @@
+# Document Errors
+# Customized error messages.
+ErrorDocument 404 /application/erros/404.php
+ErrorDocument 403 /application/erros/403.php
+ErrorDocument 500 /application/erros/500.php
+
+# Set the default handler.
+DirectoryIndex index.php
+
+# Various rewrite rules.
+<IfModule mod_rewrite.c>
+  RewriteEngine on
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  
+  #RewriteRule ^(.*)$ index.php?/$1 [L,QSA]
+
+  #RewriteRule  /controller
+  RewriteRule ^([a-zA-Z0-9_-]+)\/*$ index.php?controller=$1 [S]
+
+  #RewriteRule /controller/action
+  RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/*$ index.php?controller=$1&action=$2 [S]
+
+  #RewriteRule  /controller/action/id
+  RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/([0-9]+)/?.*$ index.php?controller=$1&action=$2&id=$3 [L]
+</IfModule> 
